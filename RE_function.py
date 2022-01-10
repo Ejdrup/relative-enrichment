@@ -43,10 +43,11 @@ def get_neighbours_list(voronoi):
         neighbours_list[neighbour_pair[1]].append(neighbour_pair[0])
     return neighbours_list
 
-def REp(ch1_points, ch2_points):
+def RE(ch1_points, ch2_points, verbose = False):
 
     # Compute the voronoi tessellation for each channel
-    print("Computing 2D voronoi tessellation.")
+    if verbose == True:
+        print("Computing 2D voronoi tessellation.")
     ch1_vor = Voronoi(ch1_points)
     ch2_vor = Voronoi(ch2_points)
 
@@ -101,10 +102,11 @@ def in_hull(hull, p):
     return sum(hull.find_simplex(p)>=0)
             
 
-def REp3D(ch1_points, ch2_points):
+def RE3D(ch1_points, ch2_points, verbose = False):
 
     # Compute the voronoi tessellation for each channel
-    print("Computing 3D voronoi tessellation.")
+    if verbose == True:
+        print("Computing 3D voronoi tessellation.")
     ch1_vor = Voronoi(ch1_points)
     ch2_vor = Voronoi(ch2_points)
     
@@ -130,28 +132,32 @@ def REp3D(ch1_points, ch2_points):
     sorted_points_ch1 = ch1_vor.points[bool_index]
     
     # Construct and query a knn tree
-    print("Constructing a knn tree")
+    if verbose == True:
+        print("Constructing a knn tree")
     ckd_tree_ch2 = cKDTree(ch2_points)
     dist_ch2, idx_ch2 = ckd_tree_ch2.query(ch1_vor.points[bool_index], k=100, n_jobs = -1)
     
     # Compare the old and new hull for differences
-    print("Comparing hulls")
+    if verbose == True:
+        print("Comparing hulls")
     n_points_ch2_in_region = [in_hull(i.points,ch2_vor.points[idx_ch2[j,:],:]) for j, i in enumerate(sorted_region_hull)]
     
     # Compute first order mean distance
-    print("Identifying neighboring points")
+    if verbose == True:
+        print("Identifying neighboring points")
     neighbours_list = get_neighbours_list(ch1_vor)
     neighbour_indices = list(compress(neighbours_list, bool_index))
     neighbour_points = [ch1_vor.points[i] for i in neighbour_indices]
     
     # Compute mean distance to first order neighbors
-    print("Computing mean distance to neighbors")
+    if verbose == True:
+        print("Computing mean distance to neighbors")
     neighbour_distances = [np.sqrt(np.sum((np.array(j)-sorted_points_ch1[i])**2,axis=1)) for i, j in enumerate(neighbour_points)]
     first_order_mean_distance = [np.nanmean(i) for i in neighbour_distances]
     
     return np.array(n_points_ch2_in_region), np.array(sorted_region_volume), np.array(first_order_mean_distance), bool_index
 
-def bin_REp(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volume = "None"):
+def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volume = "None"):
     # Try to bin
     if total_volume is "None":
         threshold = np.percentile(areas_ch1,99.5)
@@ -178,8 +184,7 @@ def bin_REp(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volu
                 
     return np.divide(pts_ratio,no_regions), no_regions, no_loc_per_region, area_per_bins
 
-def bin_REp_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, size_threshold = "None", total_volume = "None"):
-    # Try to bin
+def bin_RE_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, size_threshold = "None", total_volume = "None"):
     if total_volume is "None":
         threshold = np.percentile(areas_ch1,99.5)
         total_volume = np.sum(areas_ch1[areas_ch1 < threshold])
