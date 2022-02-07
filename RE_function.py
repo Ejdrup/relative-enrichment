@@ -32,6 +32,22 @@ from itertools import compress
 from scipy.optimize import linprog
 from scipy.spatial import Delaunay
 
+def in_hull(hull, p):
+    """
+    Test if points in `p` are in `hull`
+
+    `p` should be a `NxK` coordinates of `N` points in `K` dimensions
+    `hull` is either a scipy.spatial.Delaunay object or the `MxK` array of the 
+    coordinates of `M` points in `K`dimensions for which Delaunay triangulation
+    will be computed
+    https://stackoverflow.com/questions/16750618/whats-an-efficient-way-to-find-if-a-point-lies-in-the-convex-hull-of-a-point-cl
+    """
+    if not isinstance(hull,Delaunay):
+        hull = Delaunay(hull)
+
+    return sum(hull.find_simplex(p)>=0)
+
+
 def get_neighbours_list(voronoi):
     neighbours_list = [[] for point_index in  range(len(voronoi.points))]
     counter = 0
@@ -43,7 +59,11 @@ def get_neighbours_list(voronoi):
         neighbours_list[neighbour_pair[1]].append(neighbour_pair[0])
     return neighbours_list
 
+
 def RE(ch1_points, ch2_points, verbose = False):
+    '''
+    Comments
+    '''
 
     # Compute the voronoi tessellation for each channel
     if verbose == True:
@@ -86,24 +106,13 @@ def RE(ch1_points, ch2_points, verbose = False):
     
     return np.array(n_points_ch2_in_region), np.array(sorted_region_area), np.array(first_order_mean_distance), bool_index
 
-def in_hull(hull, p):
-    """
-    Test if points in `p` are in `hull`
 
-    `p` should be a `NxK` coordinates of `N` points in `K` dimensions
-    `hull` is either a scipy.spatial.Delaunay object or the `MxK` array of the 
-    coordinates of `M` points in `K`dimensions for which Delaunay triangulation
-    will be computed
-    https://stackoverflow.com/questions/16750618/whats-an-efficient-way-to-find-if-a-point-lies-in-the-convex-hull-of-a-point-cl
-    """
-    if not isinstance(hull,Delaunay):
-        hull = Delaunay(hull)
-
-    return sum(hull.find_simplex(p)>=0)
-            
 
 def RE3D(ch1_points, ch2_points, verbose = False):
-
+    '''
+    Comments
+    '''
+    
     # Compute the voronoi tessellation for each channel
     if verbose == True:
         print("Computing 3D voronoi tessellation.")
@@ -157,10 +166,15 @@ def RE3D(ch1_points, ch2_points, verbose = False):
     
     return np.array(n_points_ch2_in_region), np.array(sorted_region_volume), np.array(first_order_mean_distance), bool_index
 
-def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volume = "None"):
+
+def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size,  total_volume = "None", size_threshold = 99.5):
+    '''
+    Comments
+    '''
+    
     # Try to bin
     if total_volume is "None":
-        threshold = np.percentile(areas_ch1,99.5)
+        threshold = np.percentile(areas_ch1,size_threshold)
         total_volume = np.sum(areas_ch1[areas_ch1 < threshold])
     sorted_density_ch1 = np.sort(1/areas_ch1)
     sorted_density_ch1_idx = np.argsort(1/areas_ch1)
@@ -184,9 +198,13 @@ def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volum
                 
     return np.divide(pts_ratio,no_regions), no_regions, no_loc_per_region, area_per_bins
 
-def bin_RE_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, size_threshold = "None", total_volume = "None"):
+
+def bin_RE_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volume = "None", size_threshold = 99.5):
+    '''
+    Comments
+    '''
     if total_volume is "None":
-        threshold = np.percentile(areas_ch1,99.5)
+        threshold = np.percentile(areas_ch1,size_threshold)
         total_volume = np.sum(areas_ch1[areas_ch1 < threshold])
     sorted_density_ch1 = np.sort(1/areas_ch1)
     sorted_density_ch1_idx = np.argsort(1/areas_ch1)
