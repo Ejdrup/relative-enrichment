@@ -195,8 +195,8 @@ def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size,  total_volu
                 no_regions[bin_no] += 1
                 no_loc_per_region[bin_no] += n_points[sorted_density_ch1_idx[i]]
                 area_per_bins[bin_no] += areas_ch1[sorted_density_ch1_idx[i]]
-                
-    return np.divide(pts_ratio,no_regions), no_regions, no_loc_per_region, area_per_bins
+    RE_values = np.divide(pts_ratio,no_regions)           
+    return RE_values, no_regions, no_loc_per_region, area_per_bins
 
 
 def bin_RE_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volume = "None", size_threshold = 99.5):
@@ -226,5 +226,5 @@ def bin_RE_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_
                 no_regions[bin_no] += 1
                 no_loc_per_region[bin_no] += n_points[sorted_density_ch1_idx[i]]
                 area_per_bins[bin_no] += areas_ch1[sorted_density_ch1_idx[i]]
-                
-    return np.divide(pts_ratio,no_regions), no_regions, no_loc_per_region, area_per_bins
+    RE_values = np.divide(pts_ratio,no_regions)
+    return RE_values, no_regions, no_loc_per_region, area_per_bins

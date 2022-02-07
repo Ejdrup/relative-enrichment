@@ -36,12 +36,18 @@ The bin_RE module bins the values outputted by the RE module by either nearest n
 <br><br>
 Both `bin_RE()` and `bin_RE_area()` takes up to seven inputs with five mandatory:
 1. **n_points** - Equivalent to the output **n_point_ch2_in_region** from `re.RE()` or `re.RE3D()`.
-2. **areas_ch1** - Equivalent to **sorted_region_area** from `re.RE()` or **sorted_region_volume** from `re.RE3D().
-3. **first_ord_dist** - Equivalent to **first_order_mean_distance** from `re.RE()` or `re.RE3D()`.'
+2. **areas_ch1** - Equivalent to **sorted_region_area** from `re.RE()` or **sorted_region_volume** from `re.RE3D()`.
+3. **first_ord_dist** - Equivalent to **first_order_mean_distance** from `re.RE()` or `re.RE3D()`.
 4. **max_dist** - Upper limit of binning in log10 value.
 5. **step_size** - Log10 step size of bins.
-6. **total_volume** - Total volume of the area of interest. Used to normalize the RE value (default = `"None"`).
+6. **total_volume** - Total volume of the area of interest. Used to normalize the RE value (default = "None").
 7. **size_threshold** - If no **total_volume** is supplied, upper size limit to include in the normalization and binning as a percentile of nearest neighbor distance or area/volume (default = 99.5).
 
+Both functions output four elements:
+1. **RE_values** - 
+2. **no_regions** - 
+3. **no_loc_per_region** - 
+4. **area_per_bins** -  
+
 ## Example: simulated vesicle data
-Description 
+Description to be added.
