@@ -23,7 +23,6 @@ Both functions output four elements:
 3. first_order_mean_distance - Mean distance to all first order neighbors.
 4. bool_index - Boolean area specifying the reference regions with finite size.
 
-<br><br>
 The last element is always the same length as the input reference dataset, whereas reference regions with nonfinite size are excluded in the first three outputs. This element is useful for color-coded qualitative plotting.
 
 ### bin_RE module
