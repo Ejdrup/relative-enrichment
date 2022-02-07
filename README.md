@@ -22,6 +22,7 @@ Both functions output four elements:
 2. sorted_region_area (2D)/ sorted_region_volume (3D) - Area or volume of each reference region.
 3. first_order_mean_distance - Mean distance to all first order neighbors.
 4. bool_index - Boolean area specifying the reference regions with finite size.
+
 <br><br>
 The last element is always the same length as the input reference dataset, whereas reference regions with nonfinite size are excluded in the first three outputs. This element is useful for color-coded qualitative plotting.
 
