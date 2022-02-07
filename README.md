@@ -14,7 +14,7 @@ Each of these modules have two main functions, with another two supporting funct
 `import RE_function as re`.
 
 ### RE module
-The RE module computes the relative enrichment of each reference region based on the two datasets passed to the function. The 2D function is called RE, and can be run by typing **re.RE()**, whereas the 3D version is called RE3D, and can be executed with **re.RE3D()**.
+The RE module computes the relative enrichment of each reference region based on the two datasets passed to the function. The 2D function is called RE, and can be run by typing `re.RE()`, whereas the 3D version is called RE3D, and can be executed with `re.RE3D()`.
 <br><br>
 Both functions output four elements:
 <br>
