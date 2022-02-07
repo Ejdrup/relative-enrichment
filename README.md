@@ -10,7 +10,9 @@ Repository method presented in the paper:
 ## Function description
 The relative enrichment package consists of two main modules: one to compute the relative enrichment of each reference localization (RE module), and one to bin these values (bin_RE module).
 <br>
-Each of these modules have two main functions, with another two supporting functions for the RE module. All of them are stored in the RE_function.py file, which can be loaded as a package by calling **import** RE_function **as** re.
+Each of these modules have two main functions, with another two supporting functions for the RE module. All of them are stored in the RE_function.py file, which can be loaded as a package when stored in the current directory by calling:
+<br>
+**import** RE_function **as** re.
 
 ### RE module
 Description
