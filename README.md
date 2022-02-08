@@ -3,7 +3,7 @@ By Aske Lykke Ejdrup
 <br>
 Last updated on 2022/02/07.
 
-Repository method presented in the paper:
+Repository for method presented in the paper:
 <br>
 **Relative enrichment – a density-based colocalization measure for single-molecule localization microscopy**
 
@@ -44,10 +44,16 @@ Both `bin_RE()` and `bin_RE_area()` takes up to seven inputs with five mandatory
 7. **size_threshold** - If no **total_volume** is supplied, upper size limit to include in the normalization and binning as a percentile of nearest neighbor distance or area/volume (default = 99.5).
 
 Both functions output four elements:
-1. **RE_values** - 
-2. **no_regions** - 
-3. **no_loc_per_region** - 
-4. **area_per_bins** -  
+1. **RE_values** - Mean relative enrichment of each size bin. Array size is **max_dist**/**step_size**+1.
+2. **no_regions** - Number of reference regions/localizations per size bin.
+3. **no_loc_per_region** - Number of primary localization per size bin.
+4. **area_per_bins** - Total area covered by each size bin.
 
-## Example: simulated vesicle data
+## Examples
+
+### Simulated vesicle data
 Description to be added.
+
+### Pseudocode
+To be added.
+
