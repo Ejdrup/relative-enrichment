@@ -54,10 +54,16 @@ Both functions output four elements:
 ### Simulated vesicle data
 The file **example-vesicle-simulation.ipynb** contains a code to simulate and plot data from Fig. 4A-F. It also showcases how to import the **RE_function.py**.
 <br><br>
-The code is written for Jupyter Notebook, a web application for sharing computational documents in an easy-to-use way. It comes pre-installed through most Anaconda distributions (https://www.anaconda.com/) or can be downloaded on https://jupyter.org/.
+The code is written for Jupyter Notebook, a web application for sharing computational documents in an easy-to-use way. It comes pre-installed through most Anaconda distributions (https://www.anaconda.com/) or can be downloaded at https://jupyter.org/.
 <br><br>
-Most of the code is specific plotting commands to mimic the figures from the article, and can be used as a template for custom projects.
+Most of the code is specific plotting commands to mimic the figures from the article, and can be used as a template/starting-point for custom projects.
 
 ### Pseudocode
-
+The following is a pseudocode example demonstrating a typical work flow from a dual-color dataset with localizations from two molecular species to a plot showing relative enrichment by size bin:
+<br><br>
+```
+some
+pseudo
+code
+```
 
