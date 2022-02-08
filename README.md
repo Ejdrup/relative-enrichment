@@ -60,10 +60,20 @@ Most of the code is specific plotting commands to mimic the figures from the art
 
 ### Pseudocode
 The following is a pseudocode example demonstrating a typical work flow from a dual-color dataset with localizations from two molecular species to a plot showing relative enrichment by size bin:
-<br><br>
 ```
-some
-pseudo
-code
+Import relative enrichment function
+Import supporting packages
+
+Load dual-color dataset
+
+primary_species = dual-color part one
+reference_species = dual-color part two
+
+unbinned_results = RE module(reference_species, primary_species)
+
+binned_results = bin_RE module(unbinned_results, *binning instructions*)
+
+plot output one from binned_results 
+plot output two from binned_results on separate y_axis
 ```
 
