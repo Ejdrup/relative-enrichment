@@ -62,7 +62,19 @@ def get_neighbours_list(voronoi):
 
 def RE(ch1_points, ch2_points, verbose = False):
     '''
-    Comments
+    For calculating the relative enrichment of each reference species 
+    based on primary species distribution in 2D.
+
+    Input:
+    1. ch1_points - The reference species data set (Nx2).
+    2. ch2_points - The primary species data set (Mx2).
+    3. verbose - Whether to output progress (`True` or `False` (default)).  
+    
+    Output:
+    1. n_point_ch2_in_region - Number of primary species in each reference region.
+    2. sorted_region_area - Area of each reference region.
+    3. first_order_mean_distance - Mean distance to all first order neighbors.
+    4. bool_index - Boolean area specifying the reference regions with finite size.     
     '''
 
     # Compute the voronoi tessellation for each channel
@@ -110,7 +122,19 @@ def RE(ch1_points, ch2_points, verbose = False):
 
 def RE3D(ch1_points, ch2_points, verbose = False):
     '''
-    Comments
+    For calculating the relative enrichment of each reference species 
+    based on primary species distribution in 3D.
+
+    Input:
+    1. ch1_points - The reference species data set (Nx3).
+    2. ch2_points - The primary species data set (Mx3).
+    3. verbose - Whether to output progress (`True` or `False` (default)).  
+    
+    Output:
+    1. n_point_ch2_in_region - Number of primary species in each reference region.
+    2. sorted_region_volume - Volume of each reference region.
+    3. first_order_mean_distance - Mean distance to all first order neighbors.
+    4. bool_index - Boolean area specifying the reference regions with finite size.     
     '''
     
     # Compute the voronoi tessellation for each channel
@@ -169,7 +193,14 @@ def RE3D(ch1_points, ch2_points, verbose = False):
 
 def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size,  total_volume = "None", size_threshold = 99.5):
     '''
-    Comments
+    Bins output of RE() or RE3D() by mean distance to nearest neighbors for reference species regions.
+    1. n_points - Equivalent to the output **n_point_ch2_in_region** from `re.RE()` or `re.RE3D()`.
+    2. areas_ch1 - Equivalent to **sorted_region_area** from `re.RE()` or **sorted_region_volume** from `re.RE3D()`.
+    3. first_ord_dist - Equivalent to **first_order_mean_distance** from `re.RE()` or `re.RE3D()`.
+    4. max_dist - Upper limit of binning in log10 value.
+    5. step_size - Log10 step size of bins.
+    6. total_volume - Total volume of the area of interest. Used to normalize the RE value (default = "None").
+    7. size_threshold - If no **total_volume** is supplied, upper size limit to include in the normalization and binning as a percentile of nearest neighbor distance or area/volume (default = 99.5).
     '''
     
     # Try to bin
@@ -201,7 +232,14 @@ def bin_RE(n_points, areas_ch1, first_ord_dist, max_dist, step_size,  total_volu
 
 def bin_RE_area(n_points, areas_ch1, first_ord_dist, max_dist, step_size, total_volume = "None", size_threshold = 99.5):
     '''
-    Comments
+    Bins output of RE() or RE3D() by area of reference species regions.
+    1. n_points - Equivalent to the output **n_point_ch2_in_region** from `re.RE()` or `re.RE3D()`.
+    2. areas_ch1 - Equivalent to **sorted_region_area** from `re.RE()` or **sorted_region_volume** from `re.RE3D()`.
+    3. first_ord_dist - Equivalent to **first_order_mean_distance** from `re.RE()` or `re.RE3D()`.
+    4. max_dist - Upper limit of binning in log10 value.
+    5. step_size - Log10 step size of bins.
+    6. total_volume - Total volume of the area of interest. Used to normalize the RE value (default = "None").
+    7. size_threshold - If no **total_volume** is supplied, upper size limit to include in the normalization and binning as a percentile of nearest neighbor distance or area/volume (default = 99.5).
     '''
     if total_volume is "None":
         threshold = np.percentile(areas_ch1,size_threshold)
