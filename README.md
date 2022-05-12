@@ -3,7 +3,7 @@ By Aske Lykke Ejdrup
 <br>
 Last updated on 2022/02/08.
 
-Repository for method presented in the paper:
+Repository for method presented in the manuscript:
 <br>
 **Relative enrichment – a density-based colocalization measure for single-molecule localization microscopy**
 
