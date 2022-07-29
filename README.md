@@ -5,7 +5,9 @@ Last updated on 2022/02/08.
 
 Repository for method presented in the manuscript:
 <br>
-**Relative enrichment – a density-based colocalization measure for single-molecule localization microscopy**
+**A density-based enrichment measure for assessing colocalization in single-molecule localization microscopy data**
+
+DOI: https://doi.org/10.1038/s41467-022-32064-y
 
 ## Function description
 The relative enrichment package consists of two main modules: one to compute the relative enrichment of each reference localization (RE module), and one to bin these values (bin_RE module).
